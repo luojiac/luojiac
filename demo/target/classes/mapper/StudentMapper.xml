@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="lianxi.mapper.StudentMapper">
+
+    <select id="find" parameterType="int" resultType="lianxi.pojo.Student">
+        select * FROM exercise WHERE id=#{id}
+    </select>
+
+    <insert id="insert" parameterType="lianxi.pojo.Student" >
+        insert INTO exercise(name,qq)VALUE (#{name},#{qq})
+        <selectKey keyProperty="id" order="AFTER" resultType="int">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <delete id="delete" parameterType="lianxi.pojo.Student">
+        delete FROM exercise WHERE id=#{id}
+    </delete>
+
+    <update id="updata" parameterType="lianxi.pojo.Student">
+        UPDATE exercise
+        <set>
+            <if test="name!=null">
+                name=#{name},
+            </if>
+
+            <if test="qq!=null">
+                qq=#{qq},
+            </if>
+        </set>
+         WHERE id=#{id}
+    </update>
+
+
+
+
+
+
+
+
+
+
+</mapper>
